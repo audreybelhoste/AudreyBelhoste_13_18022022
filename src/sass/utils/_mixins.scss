@@ -1,0 +1,12 @@
+//== Breakpoints
+@mixin laptop {
+	@media (min-width: $min-md) {
+			@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: $min-sm) {
+			@content;
+	}
+}
