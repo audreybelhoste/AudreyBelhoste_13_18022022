@@ -9,8 +9,17 @@ import Homepage from './pages/Homepage';
 import Footer from './components/Footer';
 import SignIn from './pages/SignIn';
 import User from './pages/User';
+import useToken from './components/UseToken';
+import { useState } from 'react';
 
 function App() {
+
+  const { token, setToken } = useToken();
+
+  if(!token) {
+    return <SignIn setToken={setToken} />
+  }
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -20,7 +29,9 @@ function App() {
           </Route>
           <Route path="/signin" element={<SignIn />}>
           </Route>
-          <Route path="/user" element={<User />}>
+          <Route path="/user" element={<User 
+            token={token}
+          />}>
           </Route>
         </Routes>
         <Footer />

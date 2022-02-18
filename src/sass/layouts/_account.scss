@@ -37,7 +37,7 @@
 		width: 100%;
 		flex: 1;
 
-		.cta{
+		&.cta{
 			@include tablet{
 				flex: 0;
 			}
@@ -64,6 +64,7 @@
 .header {
   color: #fff;
   margin-bottom: 2rem;
+	text-align: center;
 
 	.edit-button {
 		border-color: #00bc77;
