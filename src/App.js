@@ -10,7 +10,6 @@ import Footer from './components/Footer';
 import SignIn from './pages/SignIn';
 import User from './pages/User';
 import useToken from './components/UseToken';
-import { useState } from 'react';
 
 function App() {
 
