@@ -1,7 +1,11 @@
-const Header = ({user}) => {
+import { useSelector } from "react-redux"
+
+const Header = () => {
+	const user = useSelector((state) => state.user);
+
 	return(
 		<div class="header">
-        <h1>Welcome back<br />{user.firstName} {user.lastName}!</h1>
+        {user && <h1>Welcome back<br /> {user.firstName} {user.lastName}!</h1>}
         <button class="edit-button">Edit Name</button>
       </div>
 	)

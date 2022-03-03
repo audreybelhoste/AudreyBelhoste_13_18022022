@@ -9,17 +9,10 @@ import Homepage from './pages/Homepage';
 import Footer from './components/Footer';
 import SignIn from './pages/SignIn';
 import User from './pages/User';
-import useToken from './components/UseToken';
 import { Provider } from 'react-redux';
 import store from './store'
 
 function App() {
-
-  const { token, setToken } = useToken();
-
-  // if(!token) {
-  //   return <SignIn setToken={setToken} />
-  // }
 
   return (
     <Provider store={store}>
