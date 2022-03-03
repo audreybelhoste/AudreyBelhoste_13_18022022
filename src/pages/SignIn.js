@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 async function loginUser(credentials) {
 
@@ -17,13 +18,15 @@ const SignIn = ({ setToken }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const dispatch = useDispatch(); 
+
   const handleSubmit = async e => {
     e.preventDefault();
     const token = await loginUser({
       email,
       password
     });
-    setToken(token.body);
+    dispatch({type: 'SET_TOKEN', payload : token.body.token});
   }
 
 	return(

@@ -12,7 +12,7 @@ const User = ({token}) => {
 		}
 	})
 	.then(res => res.json())
-	.then(data => setUser(data.body))
+	.then(data => dispatchEvent({type: 'SET_USER', payload : data.body}))
 
 	return(
 		<main class="main bg-dark">
