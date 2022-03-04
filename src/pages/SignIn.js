@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import store from "../store";
 
 async function loginUser(credentials) {
 
@@ -15,31 +14,29 @@ async function loginUser(credentials) {
     .then(data => data.json())
  }
 
-const SignIn = ({ setToken }) => {
+const SignIn = () => {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const dispatch = useDispatch();
-  let isLogged = false; 
   let navigate = useNavigate();
 
-
-  const handleSubmit = async e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    isLogged = true;
-    const token = await loginUser({
+    loginUser({
       email,
       password
-    });
-    dispatch({type: 'SET_TOKEN', payload : token.body.token});
+    }).then(
+        data => {
+          dispatch({type: 'SET_TOKEN', payload : data.body.token});
+          navigate("/user");
+        }
+      ).catch(error => {
+        alert(error)
+      });
+    ;
   }
-
-  store.subscribe(() => {
-    console.log('mise à jour du store')
-    console.log(isLogged)
-    navigate("/user");
-  })
 
 	return(
 		<main className="main bg-dark">
@@ -52,7 +49,6 @@ const SignIn = ({ setToken }) => {
               <p>Username</p>
               <input type="text" onChange={e => setEmail(e.target.value)}/>
             </label>
-            
           </div>
           <div className="input-wrapper">
             <label>

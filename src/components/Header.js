@@ -1,13 +1,28 @@
+import { useState } from "react";
 import { useSelector } from "react-redux"
+import EditUserForm from "./EditUserForm";
 
 const Header = () => {
 	const user = useSelector((state) => state.user);
+	const [editing, setEditing] = useState(false);
+
+	const editName = () => {
+		setEditing(true);
+  }
 
 	return(
 		<div class="header">
-        {user && <h1>Welcome back<br /> {user.firstName} {user.lastName}!</h1>}
-        <button class="edit-button">Edit Name</button>
-      </div>
+			<h1>Welcome back 
+				{user && !editing && <span>{user.firstName} {user.lastName} !</span>}
+			</h1>
+			{editing 
+				? <EditUserForm 
+						onCancel={() => setEditing(false)}
+					/> 
+				: <button className="edit-button" onClick={editName}>Edit Name</button>
+			}		
+			
+    </div>
 	)
 }
 

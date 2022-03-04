@@ -6,6 +6,7 @@ const initialState = {
 export const SET_TOKEN = 'SET_TOKEN'
 export const SET_USER = 'SET_USER'
 export const REMOVE_USER_AND_TOKEN = 'REMOVE_USER_AND_TOKEN'
+export const EDIT_USER = 'EDIT_USER'
 
 export function userReducer (state = initialState, action) {
     switch(action.type){
@@ -15,6 +16,8 @@ export function userReducer (state = initialState, action) {
             return {...state, user: action.payload}
         case REMOVE_USER_AND_TOKEN: 
             return {...state, token: null, user: null}
+        case EDIT_USER: 
+            return {...state, user: action.payload}
         default: 
             return state
     }

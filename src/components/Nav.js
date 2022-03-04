@@ -12,6 +12,7 @@ const Nav = () => {
   const logout = () => {
     dispatch({type: 'REMOVE_USER_AND_TOKEN'})
   }
+  
 	return (
     <nav className="main-nav">
       <Link to="/" className="main-nav-logo">
