@@ -13,7 +13,7 @@ const Header = () => {
 	return(
 		<div class="header">
 			<h1>Welcome back 
-				{user && !editing && <span>{user.firstName} {user.lastName} !</span>}
+				{user && !editing && <span class="header-name">{user.firstName} {user.lastName} !</span>}
 			</h1>
 			{editing 
 				? <EditUserForm 

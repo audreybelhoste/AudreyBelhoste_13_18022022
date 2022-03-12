@@ -1,31 +1,34 @@
-import { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Accounts from "../components/Accounts"
 import Header from "../components/Header"
+import { getUser } from "../services/userService";
+import SignIn from "./SignIn";
 
 const User = () => {
-	const token = useSelector((state) => state.token)
+	const token = useSelector((state) => state.token);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if(token){
-			fetch('http://localhost:3001/api/v1/user/profile', {
-				method: 'POST',
-				headers: {
-					'Authorization': 'Bearer' + token
-				}
-			})
-			.then(res => res.json())
-			.then(data => dispatch({type: 'SET_USER', payload: data.body}))
-		}
+		getUser(token)
+		.then(data => dispatch({type: 'SET_USER', payload: data.body}))
 	}, [])
 
-	return(
-		<main class="main bg-dark">
-			<Header />
-			<Accounts />
-		</main>
-	)
+	if(token == null){
+		return (
+			<SignIn />
+		)
+	} else {
+		return(
+			<main class="main bg-dark">
+				<Header />
+				<Accounts />
+			</main>
+		)
+	}
+
+
 }
 
 export default User

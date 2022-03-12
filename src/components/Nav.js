@@ -9,6 +9,7 @@ const Nav = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+
   const logout = () => {
     dispatch({type: 'REMOVE_USER_AND_TOKEN'})
   }
@@ -25,7 +26,7 @@ const Nav = () => {
       </Link>
       <div className="main-nav-items">
         {user &&
-          <p><FontAwesomeIcon icon={faCircleUser} />
+          <p className="main-nav-item"><FontAwesomeIcon icon={faCircleUser} />
           {user.firstName}</p>
         }
         {token ? 

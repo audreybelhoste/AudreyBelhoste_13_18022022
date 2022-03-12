@@ -1,23 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-async function loginUser(credentials) {
-
-  return fetch('http://localhost:3001/api/v1/user/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
+import { loginUser } from "../services/userService";
 
 const SignIn = () => {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState();
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -33,7 +23,7 @@ const SignIn = () => {
           navigate("/user");
         }
       ).catch(error => {
-        alert(error)
+        setError(error);
       });
     ;
   }
@@ -44,6 +34,9 @@ const SignIn = () => {
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
         <form onSubmit={handleSubmit}>
+          {error && 
+            <p className="sign-in-error">User not found</p>
+          }
           <div className="input-wrapper">
             <label>
               <p>Username</p>
@@ -56,10 +49,6 @@ const SignIn = () => {
               <input type="password" onChange={e => setPassword(e.target.value)}/>
             </label>
           </div>
-          {/* <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
-            <label for="remember-me">Remember me</label>
-          </div> */}
           <button type="submit" className="sign-in-button">Sign In</button>
         </form>
       </section>
