@@ -9,7 +9,6 @@ const Nav = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-
   const logout = () => {
     dispatch({type: 'REMOVE_USER_AND_TOKEN'})
   }

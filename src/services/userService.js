@@ -21,3 +21,14 @@ export const getUser = async (token) => {
 		alert(error)
 	}))
 }
+
+export const updateUser = (token, firstName, lastName) => {
+	return fetch('http://localhost:3001/api/v1/user/profile', {
+		method: 'PUT',
+		headers: {
+			'Authorization': 'Bearer' + token,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({firstName: firstName, lastName: lastName})
+	});
+}

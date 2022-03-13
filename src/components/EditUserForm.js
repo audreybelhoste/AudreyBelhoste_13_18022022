@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../services/userService";
 
 const EditUserForm = ({onCancel}) => {
 	const token = useSelector((state) => state.token)
@@ -11,14 +12,7 @@ const EditUserForm = ({onCancel}) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		dispatch({type: 'EDIT_USER', payload: {firstName: firstName, lastName: lastName}});
-		fetch('http://localhost:3001/api/v1/user/profile', {
-			method: 'PUT',
-			headers: {
-				'Authorization': 'Bearer' + token,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({firstName: firstName, lastName: lastName})
-		});
+		updateUser(token, firstName, lastName);
 		onCancel();
   }
 

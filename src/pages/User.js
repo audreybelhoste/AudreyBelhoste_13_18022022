@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Accounts from "../components/Accounts"
 import Header from "../components/Header"
 import { getUser } from "../services/userService";
