@@ -12,7 +12,7 @@ const User = () => {
 	useEffect(() => {
 		getUser(token)
 		.then(data => dispatch({type: 'SET_USER', payload: data.body}))
-	}, [])
+	}, [token, dispatch])
 
 	if(token == null){
 		return (
@@ -26,8 +26,6 @@ const User = () => {
 			</main>
 		)
 	}
-
-
 }
 
 export default User
